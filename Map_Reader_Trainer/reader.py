@@ -33,7 +33,6 @@ class Reader:
 
         # Calculate Notes Time Range
         self.time_max = max([note['_time'] for note in self.notes_list])
-        print(self.time_max)
     
         # Splits notes List Into Groups
         self.notes_groups = self.split_notes_list()
@@ -48,13 +47,10 @@ class Reader:
         mapping_data_file = None
         dat_files = glob.glob(self.folder_directory + '/*.dat')
         
-        print(dat_files)
         for file in dat_files:
             if self.difficulty_string in file:
                 mapping_data_file = file
                 break
-        
-        print(mapping_data_file)
 
         # Load Mapping Data Dictionary from .dat file with pandas
         with open(mapping_data_file, 'r') as f:

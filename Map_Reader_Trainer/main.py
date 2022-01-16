@@ -31,29 +31,26 @@ def aggregate_songs():
 
     # Get Good Data
     for song_name in good_songs:
-        print(f"Loading {song_name}")
         try:
             reader = Reader(f"{default_params['training_songs_folder']}/Good_Songs/{song_name}", default_params['difficulty'])
             data = reader.get_song_data()
             good_data.append(data)
-            print(data.shape)
             total_songs += 1
+            print(f'Good Song # {total_songs} / {len(good_songs)} Loaded = {total_songs / len(good_songs) * 100}%')
         except Exception:
             write_error_to_error_file(f"Error Loading {song_name}")
-            print(f"Error Loading {song_name}")
         
+    total_songs = 0
     # Get Bad Data
     for song_name in bad_songs:
-        print(f"Loading {song_name}")
         try:
             reader = Reader(f"{default_params['training_songs_folder']}/Bad_Songs/{song_name}", default_params['difficulty'])
             data = reader.get_song_data()
             bad_data.append(data)
-            print(data.shape)
             total_songs += 1
+            print(f'Bad Song # {total_songs} / {len(bad_songs)} Loaded = {total_songs / len(bad_songs) * 100}%')
         except Exception:
             write_error_to_error_file(f"Error Loading {song_name}")
-            print(f"Error Loading {song_name}")
             
 
     # Split Data into Train and Test
@@ -74,7 +71,7 @@ def aggregate_songs():
         pickle.dump(bad_train, f)
 
 
-    print(f"Gathered Data for {total_songs} Songs and Saved to {default_params['data_folder']} with train-test split of {default_params['train_test_split']}")
+    print(f"Gathered Data and Saved to {default_params['data_folder']} with train-test split of {default_params['train_test_split']}")
 
 
 def write_error_to_error_file(error):

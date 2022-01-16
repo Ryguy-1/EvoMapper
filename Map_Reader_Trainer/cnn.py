@@ -40,7 +40,7 @@ class CNN:
         self.model.add(layers.Conv2D(64, (3, 1), strides=(3, 1), activation=None, data_format='channels_first'))
         self.model.add(layers.Activation('relu'))
         self.model.add(layers.BatchNormalization())
-        assert self.model.output_shape == (None, 64, 167, 4)
+        assert self.model.output_shape == (None, 64, 167, 1)
         # Padding
         self.model.add(layers.ZeroPadding2D(((0, 1), (0, 0)), data_format='channels_first'))
         assert self.model.output_shape == (None, 64, 168, 1)

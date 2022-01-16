@@ -9,6 +9,8 @@ from create_files import create_info_dot_dat
 from create_files import create_difficulty_dot_dat
 # NumPy
 import numpy as np
+# Random
+import random
 
 class CreateHardMapping:
 
@@ -47,15 +49,31 @@ class CreateHardMapping:
 
     def add_notes(self):
         # Add Notes
+        # (Previous beat time so no overlapping notes)
+        previous_beat_time = 0
         for i in range(len(self.onsets)):
             # Convert onset time to beat time
             beat_time = self.onsets[i] * (self.bpm / 60)
             # Round Beat Time to time increment
             beat_time = round(beat_time / default_params['time_increment']) * default_params['time_increment']
+            # Check if this onset is the same as the previous onset
+            if beat_time == previous_beat_time:
+                continue
             # Add Note
-            self.difficulty_dat.add_note(time=beat_time, line_index=2, line_layer=0, type=1, cut_direction=i%2)
-            self.difficulty_dat.add_note(time=beat_time, line_index=1, line_layer=0, type=0, cut_direction=i%2)
+            self.difficulty_dat.add_note(time=beat_time, line_index=random.randint(0, 3), line_layer=random.randint(0, 2), type=generate_block_type_random(), cut_direction=random.randint(0, 8))
+            self.difficulty_dat.add_note(time=beat_time, line_index=random.randint(0, 3), line_layer=random.randint(0, 2), type=generate_block_type_random(), cut_direction=random.randint(0, 8))
+            # Update Previous Beat Time
+            previous_beat_time = beat_time
 
+def generate_block_type_random():
+    rand_num = random.randint(0, 2)
+    if rand_num == 0:
+        return 0
+    elif rand_num == 1:
+        return 1
+    # For Bombs (indices skip over 2)
+    elif rand_num == 2:
+        return 3
 
 if __name__ == "__main__":
-    mapping = CreateHardMapping(song_name = 'Sakay', song_author_name = 'rounded0.1', audio_file_location = default_params['custom_songs_folder'] + '/Sakay/song.ogg')
+    mapping = CreateHardMapping(song_name = 'Sakay', song_author_name = 'rounded0.1_RANDOM', audio_file_location = default_params['custom_songs_folder'] + '/Sakay/song.ogg')
