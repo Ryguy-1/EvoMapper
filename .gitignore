@@ -1,0 +1,7 @@
+Training_Songs/Bad_Songs/*
+Training_Songs/Good_Songs/*
+Training_Songs/Archive/*
+Map_Reader_Trainer/.data/*
+Map_Reader_Trainer/.models/*
+Map_Reader_Trainer/test_troubleshoot/*
+Map_Creator/song_temp_folder/*
