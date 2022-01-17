@@ -54,8 +54,9 @@ class Reader:
 
         # Load Mapping Data Dictionary from .dat file with pandas
         with open(mapping_data_file, 'r') as f:
-            mapping_data = json.load(f)
-
+            # Replace all single quotes with double quotes before parse json
+            mapping_data = json.loads(f.read().replace("'", '"'))
+            
         return mapping_data['_notes']
 
     # Splits Notes List Into Groups

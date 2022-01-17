@@ -1,14 +1,11 @@
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from Map_Reader_Trainer.reader import Reader
 from global_params import default_params
 # Librosa
 import librosa
 # Song Creator
 from create_files import create_info_dot_dat
 from create_files import create_difficulty_dot_dat
-# NumPy
-import numpy as np
 # Random
 import random
 
@@ -44,8 +41,8 @@ class CreateHardMapping:
         # Add Notes
         self.add_notes()
         # Compile and Save
-        self.info_dat.compile_and_save()
-        self.difficulty_dat.compile_and_save()
+        self.info_dat.compile_and_save(save_folder = "Map_Creator/song_temp_folder")
+        self.difficulty_dat.compile_and_save(save_folder = "Map_Creator/song_temp_folder")
 
     def add_notes(self):
         # Add Notes
@@ -74,6 +71,3 @@ def generate_block_type_random():
     # For Bombs (indices skip over 2)
     elif rand_num == 2:
         return 3
-
-if __name__ == "__main__":
-    mapping = CreateHardMapping(song_name = 'Sakay', song_author_name = 'rounded0.1_RANDOM', audio_file_location = default_params['custom_songs_folder'] + '/Sakay/song.ogg')
