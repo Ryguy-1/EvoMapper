@@ -22,9 +22,12 @@ class Evolve:
         # Load Discriminator
         self.discriminator = self.load_discriminator()
         
+        # Prob Denominator
+        self.prob_mutate_index = 100
+
         # Evolution Loop
         self.best_per_generation = [self.data]
-        self.evolution_iterations = 100
+        self.evolution_iterations = 1000
         self.copies_per_generation = 1000
         self.evolve()
         self.save_best_per_generation("best_per_generation_0")
@@ -86,9 +89,9 @@ class Evolve:
 
     # Each index is either a 0 or 1 (0 = no block, 1 = block)
     def mutate_row_on_off(self, row):
-        one_in_ten_list = [np.random.randint(0, 10) for i in range(len(row))]
+        one_in_ten_list = [np.random.randint(0, self.prob_mutate_index) for i in range(len(row))]
         # if one_in_ten_list[i] == 7: then one turns to zero
-        row = np.where(one_in_ten_list == 7, 0, row)
+        row = np.where(one_in_ten_list == 1, 0, row)
         # if one_in_ten_list[i] == 3: then zero turns to one
         row = np.where(one_in_ten_list == 3, 1, row)
         # Convert to floats
