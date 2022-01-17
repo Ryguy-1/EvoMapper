@@ -1,8 +1,8 @@
-from reader import Reader
 # Contains Global Default Variables: (difficulty, save_folder)
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from global_params import default_params
+from Map_Reader_Trainer.reader import Reader
 # Opencv
 import cv2
 # Glob
@@ -78,7 +78,7 @@ def write_error_to_error_file(error):
     with open(default_params['error_log_file_convert_songs'], 'a') as f:
         f.write(f"Error: {error}" + '\n')
 
-def print_group_pretty(group):
+def print_group_pretty(group, frames_show = 5_000):
     (channels, y, x) = group.shape
     on_off = group[0]
     red_blue_bomb = group[1]
@@ -87,10 +87,12 @@ def print_group_pretty(group):
     frame_counter = 0
     for i in range(y):
         if i%3 == 0:
-            print(f'Frame # {frame_counter}')
+            if frame_counter == frames_show:
+                break
             frame_counter += 1
-        print(f"On/Off: || {on_off[i]} || Red/Blue/Bomb: || {red_blue_bomb[i]} || Direction: || {direction[i]} ||")
+            print(f'Frame # {frame_counter}')
 
+        print(f"On/Off: || {on_off[i]} || Red/Blue/Bomb: || {red_blue_bomb[i]} || Direction: || {direction[i]} ||")
 
 if __name__ == "__main__":
     aggregate_songs()
