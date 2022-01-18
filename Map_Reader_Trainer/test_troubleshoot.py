@@ -2,6 +2,7 @@ import glob
 import numpy as np
 import cv2
 import json
+import pickle
 # Tensorflow
 from tensorflow.keras import models
 from reader import Reader
@@ -9,6 +10,7 @@ from reader import Reader
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from global_params import default_params
+from Map_Reader_Trainer.main import print_group_pretty
 
 
 def main():
@@ -38,4 +40,9 @@ def load_model(model_name):
 
 
 if __name__ == "__main__":
-    main()
+    # main()
+    model = load_model("model_0.1_1000_1000_epoch.h5")
+    # Load Data
+    data = pickle.load(open("best_per_generation_0.pkl", "rb"))[-1]
+    print(data.shape)
+    print_group_pretty(data[0])

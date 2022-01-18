@@ -90,8 +90,8 @@ def load_and_train():
 
 
     # Hyperparameters
-    batch_size = 64
-    epochs = 1000
+    batch_size = 128
+    epochs = 15
 
     # Model Declaration
     cnn = CNN()

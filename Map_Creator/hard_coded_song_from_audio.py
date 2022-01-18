@@ -63,11 +63,12 @@ class CreateHardMapping:
             previous_beat_time = beat_time
 
 def generate_block_type_random():
-    rand_num = random.randint(0, 2)
+    # rand_num = random.randint(0, 2) -> For Bombs also
+    rand_num = random.randint(0, 1)
     if rand_num == 0:
         return 0
     elif rand_num == 1:
         return 1
-    # For Bombs (indices skip over 2)
-    elif rand_num == 2:
-        return 3
+    # For Bombs (indices skip over 2) ->>>> No Bombs for now
+    # elif rand_num == 2:
+    #     return 3
