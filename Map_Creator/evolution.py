@@ -17,9 +17,10 @@ from data_to_mapping import Data_To_Mapping
 # Evolving
 class Evolve:
 
-    def __init__(self, data, discriminator_name = "model_0.1_1000_15_epoch"):
+    def __init__(self, data, discriminator_name = "model1_0.1_1000_15_epoch", save_name = "best_per_generation"):
         self.data = data
         self.discriminator_name = discriminator_name
+        self.save_name = save_name
 
         # Print Information
         self.print_interval = 25
@@ -37,7 +38,7 @@ class Evolve:
         self.copies_per_generation = 200
         self.early_stop_percentage = 0.24
         self.evolve()
-        self.save_best_per_generation("best_per_generation_0")
+        self.save_best_per_generation(self.save_name)
 
     def evolve(self):
         for i in range(self.evolution_iterations):
@@ -171,19 +172,13 @@ if __name__ == "__main__":
     author_name = "Your's truly"
     audio_file_location = f"Map_Creator/song_temp_folder/{song_name}/song.ogg"
     # Create Mapping Using Librosa
-    hard_mapper = CreateHardMapping(song_name = song_name, song_author_name = author_name, audio_file_location = audio_file_location)
-    # BPM
-    bpm = hard_mapper.bpm
+    CreateHardMapping(song_name = song_name, song_author_name = author_name, audio_file_location = audio_file_location)
     # Create Reader
     reader = Reader(f"Map_Creator/song_temp_folder/Outerspacee/", default_params['difficulty'])
     # Get Song Data
     data = reader.get_song_data()
     print(data.shape)
     # Start Evolution Process using Discriminator
-    evolver = Evolve(data)
-    # Save Data from Evolver to new Mapping in Custom Songs Folder
-    # data = evolver.best_per_generation[-1]
-    # Create Mapping
-    # data_to_mapping = Data_To_Mapping(data, song_name, author_name, audio_file_location)
+    evolver = Evolve(data, discriminator_name = "model1_0.1_1000_100_epoch", save_name="best_per_generation_1")
 
 

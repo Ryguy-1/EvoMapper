@@ -128,7 +128,7 @@ if __name__ == "__main__":
     author_name = "Your's truly"
     audio_file_location = f"{default_params['custom_songs_folder']}/{song_name}/song.ogg"
     # Load Data
-    data = pickle.load(open("best_per_generation_0.pkl", "rb"))[-1]
+    data = pickle.load(open("best_per_generation_1.pkl", "rb"))[-1]
     print(data.shape)
     # Create Mapping
     mapping = Data_To_Mapping(data, song_name, author_name, audio_file_location)

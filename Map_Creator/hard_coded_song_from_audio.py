@@ -11,18 +11,17 @@ import random
 
 class CreateHardMapping:
 
-    def __init__(self, song_name, song_author_name, audio_file_location = None):
+    def __init__(self, song_name, song_author_name, audio_file_location = None, save_folder = "Map_Creator/song_temp_folder"):
         if audio_file_location is None:
             return
 
         # Audio File Location
         self.audio_file_location = audio_file_location
+        self.save_folder = save_folder
 
         # General Information
         self.song_name = song_name
         self.song_author_name = song_author_name
-
-
 
         # Read Audio
         (y, sr) = librosa.load(self.audio_file_location)
@@ -41,8 +40,8 @@ class CreateHardMapping:
         # Add Notes
         self.add_notes()
         # Compile and Save
-        self.info_dat.compile_and_save(save_folder = "Map_Creator/song_temp_folder")
-        self.difficulty_dat.compile_and_save(save_folder = "Map_Creator/song_temp_folder")
+        self.info_dat.compile_and_save(save_folder = self.save_folder)
+        self.difficulty_dat.compile_and_save(save_folder = self.save_folder)
 
     def add_notes(self):
         # Add Notes

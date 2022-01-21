@@ -91,7 +91,8 @@ def load_and_train():
 
     # Hyperparameters
     batch_size = 128
-    epochs = 15
+    epochs = 100
+    which_number_model = 1
 
     # Model Declaration
     cnn = CNN()
@@ -100,7 +101,7 @@ def load_and_train():
     train(model = cnn.model, x = train_dataset, y = train_labels, val_x = test_dataset, val_y = test_labels, batch_size = batch_size, epochs = epochs)
 
     # Model Name
-    model_name = f"model_{default_params['time_increment']}_{default_params['time_steps_per_image']}_{epochs}_epoch.h5"
+    model_name = f"model{which_number_model}_{default_params['time_increment']}_{default_params['time_steps_per_image']}_{epochs}_epoch.h5"
 
     # Save Model
     save_model(cnn.model, model_name)
