@@ -1,6 +1,0 @@
-first off, i could make it so that you have a library like librosa find the onsets in the song, create randomly placed notes at those places,
-and have it evolve from there. another option is to somehow train another network to produce a mapping from a song which would be pretty dang cool
-already. In other words, it would basically be just a generator trained on a song input to produce a good mapping. i could train this network on 
-sections of a song at a time and spend a lot of time making sure the beat stuff all lines up which would be really cool but really hard also.
-I may just start off by making a program to place logical-ish (this can be like the basic idea) notes at onsets and then have it mutate according
-to the discriminator (really just like a fine-tuning I suppose??? who really knows). it could turn out pretty cool though!
